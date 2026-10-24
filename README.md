@@ -1,92 +1,92 @@
 # Todo CRUD
 
-Aplicação web de tarefas construída com Next.js 16, React 19, TypeScript, Tailwind CSS 4 e Supabase.
+Task web application built with Next.js 16, React 19, TypeScript, Tailwind CSS 4, and Supabase.
 
-O projeto implementa um CRUD completo para a tabela `todos`:
+The project implements a complete CRUD for the `todos` table:
 
-- Listar tarefas.
-- Criar tarefas.
-- Editar tarefas.
-- Excluir tarefas.
-- Exibir estados de carregamento, sucesso e erro.
+- List tasks.
+- Create tasks.
+- Edit tasks.
+- Delete tasks.
+- Show loading, success, and error states.
 
 ## Stack
 
 ### Next.js 16
 
-Framework principal da aplicação. O projeto usa:
+Main framework of the application. The project uses:
 
 - App Router.
-- Server Components para carregar dados no servidor.
-- Server Actions para criar, editar e excluir tarefas.
-- Partial Prerendering e Cache Components.
-- `next/font` para carregar a fonte Geist.
-- Turbopack no build.
+- Server Components to load data on the server.
+- Server Actions to create, edit, and delete tasks.
+- Partial Prerendering and Cache Components.
+- `next/font` to load the Geist font.
+- Turbopack in the build.
 
 ### React 19
 
-Biblioteca de interface usada pelos componentes da aplicação.
+UI library used by the application components.
 
-O projeto usa `useActionState` para conectar formulários às Server Actions e mostrar os estados de cada operação.
+The project uses `useActionState` to connect forms to Server Actions and display the state of each operation.
 
 ### TypeScript
 
-Adiciona tipagem estática ao código React e às funções do servidor.
+Adds static typing to React code and server functions.
 
 ### Tailwind CSS 4
 
-Framework de estilos utilitários. O CSS global está em `app/globals.css` e usa:
+Utility-first styling framework. Global CSS is in `app/globals.css` and uses:
 
 - `tailwindcss`.
 - `tw-animate-css`.
-- Variáveis CSS para cores, bordas e raios.
-- Suporte a tema escuro.
+- CSS variables for colors, borders, and radii.
+- Dark theme support.
 
 ### Turbopack
 
-Usado pelo Next.js para compilar a aplicação durante o build. A integração CSS está configurada em `next.config.ts` com `@tailwindcss/turbopack`.
+Used by Next.js to compile the application during the build. CSS integration is configured in `next.config.ts` with `@tailwindcss/turbopack`.
 
 ### shadcn/ui
 
-O projeto possui configuração de shadcn/ui em `components.json`. Ela define aliases, estilo visual, cores base, variáveis CSS e Lucide como biblioteca de ícones.
+The project includes shadcn/ui configuration in `components.json`. It defines aliases, visual style, base colors, CSS variables, and Lucide as the icon library.
 
-Os componentes da tela atual usam classes Tailwind diretamente. Componentes shadcn/ui podem ser adicionados depois sem alterar a arquitetura do CRUD.
+The components on the current screen use Tailwind classes directly. shadcn/ui components can be added later without changing the CRUD architecture.
 
 ### Supabase
 
-Supabase fornece:
+Supabase provides:
 
-- PostgreSQL para persistência.
-- PostgREST para acesso HTTP à tabela.
-- Supabase SSR para criar clientes compatíveis com Server Components.
-- Row Level Security (RLS) para controlar operações na tabela.
+- PostgreSQL for persistence.
+- PostgREST for HTTP access to the table.
+- Supabase SSR to create clients compatible with Server Components.
+- Row Level Security (RLS) to control table operations.
 
-Pacotes usados:
+Packages used:
 
-- `@supabase/supabase-js`: cliente oficial do Supabase.
-- `@supabase/ssr`: integração com cookies e renderização no servidor.
-- `@supabase/server`: suporte de servidor instalado no projeto.
+- `@supabase/supabase-js`: official Supabase client.
+- `@supabase/ssr`: integration with cookies and server rendering.
+- `@supabase/server`: server support installed in the project.
 
 ### ESLint
 
-ESLint está configurado pelo script `npm run lint`. A configuração usa `eslint-config-next`.
+ESLint is configured by the `npm run lint` script. The configuration uses `eslint-config-next`.
 
-No estado atual, o lint depende de compatibilidade entre `eslint-config-next@14.2.35` e o formato flat config usado pelo ESLint 9. O build e a checagem TypeScript continuam funcionando.
+In the current state, lint depends on compatibility between `eslint-config-next@14.2.35` and the flat config format used by ESLint 9. Build and TypeScript checks still work.
 
-## Estrutura principal
+## Main structure
 
 ```text
 app/
 ├── actions/
-│   └── todos.ts              # Server Actions do CRUD
-├── page.tsx                  # Lista tarefas e compõe a página
-├── todo-item.tsx             # Edição e exclusão de tarefa
-├── todos-form.tsx            # Criação de tarefa
-├── globals.css               # Tailwind e variáveis globais
+│   └── todos.ts              # CRUD Server Actions
+├── page.tsx                  # Lists tasks and composes the page
+├── todo-item.tsx             # Task editing and deletion
+├── todos-form.tsx            # Task creation
+├── globals.css               # Tailwind and global variables
 └── utils/supabase/
-    ├── server.ts             # Cliente Supabase para o servidor
-    ├── client.ts             # Cliente Supabase para o navegador
-    └── middleware.ts         # Integração de cookies para middleware
+    ├── server.ts             # Supabase client for the server
+    ├── client.ts             # Supabase client for the browser
+    └── middleware.ts         # Cookie integration for middleware
 
 supabase/
 └── migrations/
@@ -94,61 +94,61 @@ supabase/
     └── 20261014091000_allow_writing_todos.sql
 ```
 
-## Como executar
+## How to run
 
-### Requisitos
+### Requirements
 
-- Node.js 20 ou superior.
+- Node.js 20 or higher.
 - npm.
-- Uma instância Supabase local ou um projeto Supabase hospedado.
+- A local Supabase instance or a hosted Supabase project.
 
-### Instalar dependências
+### Install dependencies
 
 ```bash
 npm install
 ```
 
-### Configurar variáveis de ambiente
+### Configure environment variables
 
-Crie `.env.local` na raiz:
+Create `.env.local` at the root:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sua_chave_publicavel
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
 ```
 
-Para Supabase hospedado, substitua a URL local pela URL do projeto e use a chave publicável correspondente.
+For hosted Supabase, replace the local URL with the project URL and use the corresponding publishable key.
 
-Nunca coloque `SUPABASE_SECRET_KEY` ou outra chave privilegiada em variáveis `NEXT_PUBLIC_*`. Variáveis com esse prefixo ficam disponíveis no navegador.
+Never put `SUPABASE_SECRET_KEY` or any other privileged key in `NEXT_PUBLIC_*` variables. Variables with this prefix are exposed in the browser.
 
-### Iniciar desenvolvimento
+### Start development
 
 ```bash
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-### Criar build de produção
+### Create a production build
 
 ```bash
 npm run build
 npm run start
 ```
 
-## Configuração do Supabase
+## Supabase setup
 
-### Tabela `todos`
+### `todos` table
 
-A aplicação espera uma tabela pública com estas colunas:
+The application expects a public table with these columns:
 
-| Coluna | Tipo | Uso |
+| Column | Type | Usage |
 | --- | --- | --- |
-| `id` | `bigint` ou `integer` | Identificador da tarefa |
-| `name` | `text` | Nome da tarefa |
-| `created_at` | `timestamptz` | Data de criação |
+| `id` | `bigint` or `integer` | Task identifier |
+| `name` | `text` | Task name |
+| `created_at` | `timestamptz` | Creation date |
 
-Exemplo de criação:
+Creation example:
 
 ```sql
 create table public.todos (
@@ -160,85 +160,85 @@ create table public.todos (
 
 ### Migrations
 
-As migrations do projeto habilitam RLS e criam políticas para o CRUD:
+Project migrations enable RLS and create CRUD policies:
 
-- `20261014090200_allow_reading_todos.sql`: permite `SELECT`.
-- `20261014091000_allow_writing_todos.sql`: permite `INSERT`, `UPDATE` e `DELETE`.
+- `20261014090200_allow_reading_todos.sql`: allows `SELECT`.
+- `20261014091000_allow_writing_todos.sql`: allows `INSERT`, `UPDATE`, and `DELETE`.
 
-Execute os arquivos na ordem em um ambiente Supabase local ou no SQL Editor do projeto Supabase.
+Run the files in order in a local Supabase environment or in the Supabase project SQL Editor.
 
-Com Supabase CLI configurado, use:
+With Supabase CLI configured, use:
 
 ```bash
 supabase db reset
 ```
 
-O comando recria o banco local e aplica as migrations existentes.
+The command recreates the local database and applies existing migrations.
 
-### RLS e segurança
+### RLS and security
 
-As políticas atuais permitem leitura e escrita para os papéis `anon` e `authenticated`:
+Current policies allow read and write access for the `anon` and `authenticated` roles:
 
 ```sql
 to anon, authenticated
 ```
 
-Isso é adequado apenas para demonstração ou protótipo. Em produção, a aplicação deve ter autenticação e políticas vinculadas ao usuário responsável pela tarefa. Sem essa alteração, qualquer cliente com a chave publicável pode criar, editar e excluir tarefas.
+This is suitable only for demonstration or prototype purposes. In production, the application should have authentication and policies tied to the user responsible for each task. Without this change, any client with the publishable key can create, edit, and delete tasks.
 
-## Como o CRUD funciona
+## How CRUD works
 
-### Leitura
+### Read
 
-`app/page.tsx` cria um cliente Supabase no servidor, consulta `todos` e renderiza cada registro com `TodoItem`.
+`app/page.tsx` creates a Supabase client on the server, queries `todos`, and renders each record with `TodoItem`.
 
-Como a leitura usa cookies e dados de requisição, o conteúdo dinâmico fica dentro de um limite `Suspense`, seguindo o comportamento do Next.js 16 com Cache Components.
+Because reading uses cookies and request data, dynamic content stays inside a `Suspense` boundary, following Next.js 16 behavior with Cache Components.
 
-### Criação
+### Create
 
-`CreateTodoForm` envia o campo `name` para `createTodo` em `app/actions/todos.ts`.
+`CreateTodoForm` sends the `name` field to `createTodo` in `app/actions/todos.ts`.
 
-A Server Action:
+The Server Action:
 
-1. Valida e remove espaços extras do nome.
-2. Insere o registro no Supabase.
-3. Revalida a rota `/`.
-4. Retorna mensagem de sucesso ou erro.
+1. Validates and trims extra spaces from the name.
+2. Inserts the record into Supabase.
+3. Revalidates the `/` route.
+4. Returns a success or error message.
 
-### Edição
+### Edit
 
-`TodoItem` envia `id` e `name` para `updateTodo`.
+`TodoItem` sends `id` and `name` to `updateTodo`.
 
-A ação valida o identificador, atualiza somente a tarefa correspondente e revalida `/`.
+The action validates the identifier, updates only the matching task, and revalidates `/`.
 
-### Exclusão
+### Delete
 
-`TodoItem` envia o `id` para `deleteTodo`.
+`TodoItem` sends `id` to `deleteTodo`.
 
-A ação valida o identificador, exclui o registro correspondente e revalida `/`.
+The action validates the identifier, deletes the matching record, and revalidates `/`.
 
 ## Scripts
 
-| Comando | Descrição |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Inicia o servidor de desenvolvimento |
-| `npm run build` | Cria o build de produção |
-| `npm run start` | Inicia o build de produção |
-| `npm run lint` | Executa o ESLint |
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates the production build |
+| `npm run start` | Starts the production build |
+| `npm run lint` | Runs ESLint |
 
-## Validação
+## Validation
 
-O build pode ser validado com:
+The build can be validated with:
 
 ```bash
 npm run build
 ```
 
-O build executa compilação, checagem TypeScript, coleta de dados e geração das rotas.
+The build runs compilation, TypeScript checks, data collection, and route generation.
 
-## Próximos passos recomendados
+## Recommended next steps
 
-- Adicionar autenticação com Supabase Auth.
-- Associar cada tarefa a um `user_id`.
-- Restringir RLS ao usuário autenticado.
-- Adicionar status de conclusão.
-- Corrigir a compatibilidade do `eslint-config-next` com ESLint 9.
+- Add authentication with Supabase Auth.
+- Associate each task with a `user_id`.
+- Restrict RLS to the authenticated user.
+- Add completion status.
+- Fix `eslint-config-next` compatibility with ESLint 9.
